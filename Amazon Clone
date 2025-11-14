@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Mini Clone</title>
+    <style>
+        body { margin:0; font-family: Arial; background:#f2f2f2; }
+        .navbar { background:#131921; color:white; padding:15px; font-size:20px; }
+        .search-box { width:60%; padding:8px; }
+        .products { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:20px; padding:20px; }
+        .card { background:white; padding:10px; border-radius:4px; box-shadow:0 0 4px #ccc; text-align:center; }
+        .card img { width:100%; height:140px; object-fit:cover; }
+        button { padding:8px 14px; background:#ffa41c; border:none; margin-top:8px; cursor:pointer; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    Amazon Clone
+    <input class="search-box" id="search" placeholder="Search products..." onkeyup="searchProduct()">
+</div>
+
+<div class="products" id="productBox"></div>
+
+<script>
+const products = [
+    {name:"Laptop", img:"https://via.placeholder.com/200"},
+    {name:"Headphones", img:"https://via.placeholder.com/200"},
+    {name:"Shoes", img:"https://via.placeholder.com/200"},
+    {name:"Watch", img:"https://via.placeholder.com/200"}
+];
+
+function showProducts(list){
+    const box = document.getElementById("productBox");
+    box.innerHTML = "";
+    list.forEach(p => {
+        box.innerHTML += `
+        <div class='card'>
+            <img src="${p.img}">
+            <h3>${p.name}</h3>
+            <button>Add to Cart</button>
+        </div>`;
+    });
+}
+
+function searchProduct(){
+    let text = document.getElementById("search").value.toLowerCase();
+    let filtered = products.filter(p => p.name.toLowerCase().includes(text));
+    showProducts(filtered);
+}
+
+showProducts(products);
+</script>
+
+</body>
+</html>
